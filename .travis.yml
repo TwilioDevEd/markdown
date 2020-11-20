@@ -1,24 +1,18 @@
-dist: xenial
-sudo: false
 language: python
 cache: pip
 
 matrix:
   include:
-    - python: '2.7'
-      env: TOXENV=py27
     - python: '3.5'
       env: TOXENV=py35
     - python: '3.6'
       env: TOXENV=py36
     - python: '3.7'
       env: TOXENV=py37
-    - python: 'pypy'
-      env: TOXENV=pypy
-      dist: trusty
+    - python: '3.8'
+      env: TOXENV=py38
     - python: 'pypy3'
       env: TOXENV=pypy3
-      dist: trusty
     - env: TOXENV=flake8
     - env: TOXENV=checkspelling
       addons:
@@ -27,6 +21,8 @@ matrix:
           - aspell
           - aspell-en
     - env: TOXENV=pep517check
+    - env: TOXENV=checklinks
+      before_install: npm install -g markdown-link-check
 
 addons:
   apt:
@@ -34,8 +30,7 @@ addons:
     - libtidy-0.99-0
 
 install:
-  # NOTE: setuptools needs to be installed explicitly for py34 (trusty).
-  - pip install 'setuptools>=36' tox
+  - pip install tox
 
 script:
   - tox

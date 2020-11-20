@@ -15,8 +15,6 @@ License: [BSD](https://opensource.org/licenses/bsd-license.php)
 
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
 from . import Extension
 from ..treeprocessors import Treeprocessor
 
@@ -46,7 +44,7 @@ def parse_hl_lines(expr):
 
 
 # ------------------ The Main CodeHilite Class ----------------------
-class CodeHilite(object):
+class CodeHilite:
     """
     Determine language of source code, and pass it into pygments hilighter.
 
@@ -123,13 +121,15 @@ class CodeHilite(object):
                                                   cssclass=self.css_class,
                                                   style=self.style,
                                                   noclasses=self.noclasses,
-                                                  hl_lines=self.hl_lines)
+                                                  hl_lines=self.hl_lines,
+                                                  wrapcode=True)
             else:
                 formatter = self.pygments_formatter(linenos=self.linenums,
                                                     cssclass=self.css_class,
                                                     style=self.style,
                                                     noclasses=self.noclasses,
-                                                    hl_lines=self.hl_lines)
+                                                    hl_lines=self.hl_lines,
+                                                    wrapcode=True)
             return highlight(self.src, lexer, formatter)
         else:
             # just escape and build markup usable by JS highlighting libs
@@ -150,16 +150,16 @@ class CodeHilite(object):
 
     def _parseHeader(self):
         """
-        Determines language of a code block from shebang line and whether said
-        line should be removed or left in place. If the sheband line contains a
-        path (even a single /) then it is assumed to be a real shebang line and
-        left alone. However, if no path is given (e.i.: #!python or :::python)
-        then it is assumed to be a mock shebang for language identifitation of
-        a code fragment and removed from the code block prior to processing for
-        code highlighting. When a mock shebang (e.i: #!python) is found, line
-        numbering is turned on. When colons are found in place of a shebang
-        (e.i.: :::python), line numbering is left in the current state - off
-        by default.
+        Determines language of a code block from shebang line and whether the
+        said line should be removed or left in place. If the sheband line
+        contains a path (even a single /) then it is assumed to be a real
+        shebang line and left alone. However, if no path is given
+        (e.i.: #!python or :::python) then it is assumed to be a mock shebang
+        for language identification of a code fragment and removed from the
+        code block prior to processing for code highlighting. When a mock
+        shebang (e.i: #!python) is found, line numbering is turned on. When
+        colons are found in place of a shebang (e.i.: :::python), line
+        numbering is left in the current state - off by default.
 
         Also parses optional list of highlight lines, like:
 
@@ -271,7 +271,7 @@ class CodeHiliteExtension(Extension):
                                    'Default: html']
             }
 
-        super(CodeHiliteExtension, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def extendMarkdown(self, md):
         """ Add HilitePostprocessor to Markdown instance. """

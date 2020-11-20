@@ -9,7 +9,7 @@ propose changes to this document in a pull request.
 
 This project and everyone participating in it is governed by the
 [Python-Markdown Code of Conduct]. By participating, you are expected to uphold
-this code. Please report unacceptable behavior to <markdown@freewisdom.org>.
+this code. Please report unacceptable behavior to [markdown@freewisdom.org][email].
 
 ## Project Organization
 
@@ -335,6 +335,12 @@ with no arguments. See help (`tox -h`) for more options.
     dependencies may differ significantly from system to system and is outside
     the scope of this guide.
 
+!!! seealso "See Also"
+
+    Python-Markdown provides [test tools] which simply testing Markdown syntax.
+    Understanding those tools will often help in understanding why a test may be
+    failing.
+
 ## Versions
 
 Python-Markdown follows [Semantic Versioning] and uses the
@@ -467,6 +473,7 @@ label from the same group.
 
 [Python-Markdown Organization]: https://github.com/Python-Markdown
 [Python-Markdown Code of Conduct]: https://github.com/Python-Markdown/markdown/blob/master/CODE_OF_CONDUCT.md
+[email]: mailto:markdown@freewisdom.org
 [Python-Markdown/markdown]: https://github.com/Python-Markdown/markdown
 [issue tracker]: https://github.com/Python-Markdown/markdown/issues
 [syntax rules]: https://daringfireball.net/projects/markdown/syntax
@@ -489,12 +496,13 @@ label from the same group.
 [configure a remote]: https://help.github.com/articles/configuring-a-remote-for-a-fork
 [sync changes]: https://help.github.com/articles/syncing-a-fork
 [virtual environment]: https://virtualenv.pypa.io/en/stable/
-[User Guide]: https://virtualenv.pypa.io/en/stable/userguide/#usage
+[User Guide]: https://virtualenv.pypa.io/en/stable/user_guide.html
 [Development Mode]: https://setuptools.readthedocs.io/en/latest/setuptools.html#development-mode
 [PyTidyLib]: https://countergram.github.io/pytidylib/
 [HTML Tidy]: https://www.html-tidy.org/
 [tox]: https://tox.readthedocs.io/en/latest/
 [aspell]: http://aspell.net/
+[test tools]: test_tools.md
 [Semantic Versioning]: https://semver.org/
 [markdown/__init__.py]: https://github.com/Python-Markdown/markdown/blob/master/markdown/__init__.py#L43
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/

@@ -34,6 +34,10 @@ part of the list.
 
     Fenced Code Blocks are only supported at the document root level.
     Therefore, they cannot be nested inside lists or blockquotes.
+    If you need to nest fenced code blocks, you may want to try the
+    the third party extension [SuperFences] instead.
+
+[SuperFences]: https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
 
 ### Language
 
@@ -64,7 +68,7 @@ The above will output:
 </code></pre>
 ```
 
-[GitHub][]'s backtick (`\``) syntax is also supported:
+[GitHub][]'s backtick (`\``) syntax is also supported in this extension:
 
 ````md
 ```python
@@ -114,3 +118,9 @@ See [Extensions](index.md) for general extension usage. Use `fenced_code` as
 the name of the extension.
 
 This extension does not accept any special configuration options.
+
+A trivial example:
+
+```python
+markdown.markdown(some_text, extensions=['fenced_code'])
+```

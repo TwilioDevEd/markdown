@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Python Markdown
 
@@ -20,7 +19,6 @@ Copyright 2004 Manfred Stienstra (the original version)
 License: BSD (see LICENSE.md for details).
 """
 
-from __future__ import unicode_literals
 from markdown.test_tools import TestCase
 
 
@@ -36,5 +34,19 @@ class TestLegacyEm(TestCase):
         self.assertMarkdownRenders(
             '__connected__words__',
             '<p><strong>connected</strong>words__</p>',
+            extensions=['legacy_em']
+        )
+
+    def test_complex_emphasis_underscore(self):
+        self.assertMarkdownRenders(
+            'This is text __bold _italic bold___ with more text',
+            '<p>This is text <strong>bold <em>italic bold</em></strong> with more text</p>',
+            extensions=['legacy_em']
+        )
+
+    def test_complex_emphasis_underscore_mid_word(self):
+        self.assertMarkdownRenders(
+            'This is text __bold_italic bold___ with more text',
+            '<p>This is text <strong>bold<em>italic bold</em></strong> with more text</p>',
             extensions=['legacy_em']
         )

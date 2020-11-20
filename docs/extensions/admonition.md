@@ -99,7 +99,7 @@ Styling
 There is no CSS included as part of this extension. Check out the default
 [Sphinx][sphinx] theme for inspiration.
 
-[sphinx]: http://sphinx.pocoo.org/
+[sphinx]: https://www.sphinx-doc.org/en/stable/
 
 ## Usage
 
@@ -107,3 +107,9 @@ See [Extensions](index.md) for general extension usage. Use `admonition` as the
 name of the extension.
 
 This extension does not accept any special configuration options.
+
+A trivial example:
+
+```python
+markdown.markdown(some_text, extensions=['admonition'])
+```

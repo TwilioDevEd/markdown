@@ -11,9 +11,9 @@ This extension is included in the standard Markdown library.
 
 ## Syntax
 
-The basic syntax was inspired by [Maruku][]'s Attribute Lists feature.
+The basic syntax was inspired by Maruku's Attribute Lists feature (see [web archive][Maruku]).
 
-[Maruku]: http://maruku.rubyforge.org/proposal.html#attribute_lists
+[Maruku]: https://web.archive.org/web/20170324172643/http://maruku.rubyforge.org/proposal.html
 
 ### The List
 
@@ -96,3 +96,9 @@ See [Extensions](index.md) for general extension usage. Use `attr_list` as the
 name of the extension.
 
 This extension does not accept any special configuration options.
+
+A trivial example:
+
+```python
+markdown.markdown(some_text, extensions=['attr_list'])
+```

@@ -18,3 +18,13 @@ Copyright 2004 Manfred Stienstra (the original version)
 
 License: BSD (see LICENSE.md for details).
 """
+
+from markdown.test_tools import TestCase
+
+
+class TestRawHtml(TestCase):
+    def test_inline_html_angle_brackets(self):
+        self.assertMarkdownRenders("<span>e<c</span>", "<p><span>e&lt;c</span></p>")
+        self.assertMarkdownRenders("<span>e>c</span>", "<p><span>e&gt;c</span></p>")
+        self.assertMarkdownRenders("<span>e < c</span>", "<p><span>e &lt; c</span></p>")
+        self.assertMarkdownRenders("<span>e > c</span>", "<p><span>e &gt; c</span></p>")

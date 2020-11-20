@@ -40,6 +40,7 @@ Some *emphasized{@id=bar}* text.
 
 ```html
 <p>Some <em id="bar">emphasized</em> text.</p>
+```
 
 You can also define attributes in images:
 
@@ -53,7 +54,13 @@ You can also define attributes in images:
 
 ## Usage
 
-See [Extensions](index.md) for general extension usage. Use `legacy_attr` as the
+See [Extensions](index.md) for general extension usage. Use `legacy_attrs` as the
 name of the extension.
 
 This extension does not accept any special configuration options.
+
+A trivial example:
+
+```python
+markdown.markdown(some_text, extensions=['legacy_attrs'])
+```
