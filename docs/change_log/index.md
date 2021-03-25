@@ -3,6 +3,15 @@ title: Change Log
 Python-Markdown Change Log
 =========================
 
+Feb 24, 2021: version 3.3.4 (a bug-fix release).
+
+* Properly parse unclosed tags in code spans (#1066).
+* Properly parse processing instructions in md_in_html (#1070).
+* Properly parse code spans in md_in_html (#1069).
+* Preserve text immediately before an admonition (#1092).
+* Simplified regex for HTML placeholders (#928) addressing (#932).
+* Ensure `permalinks` and `ankorlinks` are not restricted by `toc_depth` (#1107).
+
 Oct 25, 2020: version 3.3.3 (a bug-fix release).
 
 * Unify all block-level tags (#1047).

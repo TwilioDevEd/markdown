@@ -21,6 +21,7 @@ License: BSD (see LICENSE.md for details).
 """
 
 from markdown.test_tools import TestCase
+import markdown
 
 
 class TestHTMLBlocks(TestCase):
@@ -663,6 +664,48 @@ class TestHTMLBlocks(TestCase):
             '<p>&lt;foo</p>'
         )
 
+    def test_raw_unclosed_tag_in_code_span(self):
+        self.assertMarkdownRenders(
+            self.dedent(
+                """
+                `<div`.
+
+                <div>
+                hello
+                </div>
+                """
+            ),
+            self.dedent(
+                """
+                <p><code>&lt;div</code>.</p>
+                <div>
+                hello
+                </div>
+                """
+            )
+        )
+
+    def test_raw_unclosed_tag_in_code_span_space(self):
+        self.assertMarkdownRenders(
+            self.dedent(
+                """
+                ` <div `.
+
+                <div>
+                hello
+                </div>
+                """
+            ),
+            self.dedent(
+                """
+                <p><code>&lt;div</code>.</p>
+                <div>
+                hello
+                </div>
+                """
+            )
+        )
+
     def test_raw_attributes(self):
         self.assertMarkdownRenders(
             '<p id="foo", class="bar baz", style="margin: 15px; line-height: 1.5; text-align: center;">text</p>',
@@ -1073,6 +1116,27 @@ class TestHTMLBlocks(TestCase):
             )
         )
 
+    def test_raw_processing_instruction_code_span(self):
+        self.assertMarkdownRenders(
+            self.dedent(
+                """
+                `<?php`
+
+                <div>
+                foo
+                </div>
+                """
+            ),
+            self.dedent(
+                """
+                <p><code>&lt;?php</code></p>
+                <div>
+                foo
+                </div>
+                """
+            )
+        )
+
     def test_raw_declaration_one_line(self):
         self.assertMarkdownRenders(
             '<!DOCTYPE html>',
@@ -1106,6 +1170,27 @@ class TestHTMLBlocks(TestCase):
                 <!DOCTYPE html PUBLIC
                   "-//W3C//DTD XHTML 1.1//EN"
                   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+                """
+            )
+        )
+
+    def test_raw_declaration_code_span(self):
+        self.assertMarkdownRenders(
+            self.dedent(
+                """
+                `<!`
+
+                <div>
+                foo
+                </div>
+                """
+            ),
+            self.dedent(
+                """
+                <p><code>&lt;!</code></p>
+                <div>
+                foo
+                </div>
                 """
             )
         )
@@ -1186,6 +1271,27 @@ class TestHTMLBlocks(TestCase):
                     document.write(">");
 
                 ]]>
+                """
+            )
+        )
+
+    def test_raw_cdata_code_span(self):
+        self.assertMarkdownRenders(
+            self.dedent(
+                """
+                `<![`
+
+                <div>
+                foo
+                </div>
+                """
+            ),
+            self.dedent(
+                """
+                <p><code>&lt;![</code></p>
+                <div>
+                foo
+                </div>
                 """
             )
         )
@@ -1501,3 +1607,13 @@ class TestHTMLBlocks(TestCase):
                 """
             )
         )
+
+    def test_placeholder_in_source(self):
+        # This should never occur, but third party extensions could create weird edge cases.
+        md = markdown.Markdown()
+        # Ensure there is an htmlstash so relevant code (nested in `if replacements`) is run.
+        md.htmlStash.store('foo')
+        # Run with a placeholder which is not in the stash
+        placeholder = md.htmlStash.get_placeholder(md.htmlStash.html_counter + 1)
+        result = md.postprocessors['raw_html'].run(placeholder)
+        self.assertEqual(placeholder, result)
